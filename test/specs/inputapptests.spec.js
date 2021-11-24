@@ -16,7 +16,9 @@ describe('My Input Values App', () => {
 
     it('Should find the subtitle of the Inputs page', async () => {
         console.log('2° test');
-        await expect(InputPage.getSubtitle).toHaveTextContaining('Number');
+        if(expect(InputPage.getSubtitle).toHaveTextContaining('Numbert')){
+            await browser.saveScreenshot('./test/Failure.png');
+        }
     });
     
     it('Should insert #4 manually', async () => {

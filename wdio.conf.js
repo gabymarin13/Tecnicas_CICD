@@ -146,7 +146,14 @@ exports.config = {
         // or website depending on the result. For example, it is pretty handy to take a screenshot every time
         // an assertion fails.
         expectationResultHandler: function(passed, assertion) {
-            // do something
+           /**
+         * only take screenshot if assertion failed
+         */
+        if(passed) {
+            return console.log("All fine with this test");
+        }
+            //browser.saveScreenshot(`assertionError_${assertion.error.message}.png`)
+            browser.saveScreenshot('./test/screenshots/Failure.png');
         }
     },
     
