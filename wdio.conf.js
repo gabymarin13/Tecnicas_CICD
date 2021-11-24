@@ -149,11 +149,10 @@ exports.config = {
            /**
          * only take screenshot if assertion failed
          */
-        if(passed) {
-            return console.log("All fine with this test");
-        }
-            //browser.saveScreenshot(`assertionError_${assertion.error.message}.png`)
-            browser.saveScreenshot('./test/screenshots/Failure.png');
+            if(!passed) {
+                return console.log("Test failed");
+                browser.saveScreenshot('./test/screenshots/Failure.png');
+            }
         }
     },
     
