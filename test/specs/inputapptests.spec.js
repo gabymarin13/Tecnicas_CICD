@@ -17,7 +17,7 @@ describe('My Input Values App', () => {
     it('Should find the subtitle of the Inputs page', async () => {
         console.log('2° test');
         if(expect(InputPage.getSubtitle).toHaveTextContaining('Numbert')){
-            await browser.saveScreenshot('./test/Failure.png');
+            await browser.saveScreenshot('./test/screenshots/Failure' + Math.floor((Math.random() * 100) + 1 ) + '.png');
         }
     });
     

@@ -151,7 +151,7 @@ exports.config = {
          */
             if(!passed) {
                 return console.log("Test failed");
-                browser.saveScreenshot('./test/screenshots/Failure.png');
+                browser.saveScreenshot('./test/screenshots/Failure' + Math.floor((Math.random() * 100) + 1 ) + '.png');
             }
         }
     },
