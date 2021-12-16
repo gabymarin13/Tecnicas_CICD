@@ -66,6 +66,14 @@ public class DummyRestApiExample {
                 post("create").then().spec(responseSpecification).log().body();
     }
 
+    @Test
+    public void UpdateOneEmployee(){
+        initEmployee();
+        given().
+                spec(requestSpecification.body(employee)).
+                post("update/1").then().spec(responseSpecification).log().body();
+    }
+
     private void initEmployee(){
         employee = new Employee(DataHelper.generateName(), DataHelper.generateRandomSalary(), DataHelper.generateRandomAge());
     }
