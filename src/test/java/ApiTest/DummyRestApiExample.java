@@ -1,21 +1,23 @@
 package ApiTest;
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.*;
-
+import helpers.DataHelper;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.http.ContentType;
 import io.restassured.specification.*;
 import org.testng.annotations.*;
+import DataEntities.Employee;
 
 public class DummyRestApiExample {
     RequestSpecification requestSpecification;
     ResponseSpecification responseSpecification;
+    Employee employee;
 
     @BeforeTest
     public void setUp(){
         requestSpecification = new RequestSpecBuilder().
-                setBaseUri("http://dummy.restapiexample.com/api/v1").build();
+                setBaseUri("http://dummy.restapiexample.com/api/v1").setContentType(ContentType.JSON).build();
         responseSpecification = new ResponseSpecBuilder().
                 expectStatusCode(200).
                 expectContentType(ContentType.JSON).
@@ -57,10 +59,15 @@ public class DummyRestApiExample {
     }
 
     @Test
-    public void CreateEmployee(){
+    public void CreateOneEmployee(){
+        initEmployee();
         given().
-                spec(requestSpecification.body("{\"name\":\"test\",\"salary\":\"123\",\"age\":\"23\"}")).
+                spec(requestSpecification.body(employee)).
                 post("create").then().spec(responseSpecification).log().body();
+    }
+
+    private void initEmployee(){
+        employee = new Employee(DataHelper.generateName(), DataHelper.generateRandomSalary(), DataHelper.generateRandomAge());
     }
 
     @Test
@@ -71,6 +78,7 @@ public class DummyRestApiExample {
                 spec(responseSpecification).
                 assertThat().body("message", equalTo("Successfully! Record has been deleted")).log().body();
     }
+
 
 }
 
